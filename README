@@ -1,0 +1,43 @@
+*****			Version Control                      *****
+Version       		Description
+V1.0.0:Setting up       Version & progress record
+	       		ADD README	
+V1.1.0:Basic class	TDD the basic class
+			ADD Othello.h	char[8][8] board 
+			    		void printBoard()
+					Othello() 
+					void init() 
+			    Othello.cc
+			    TestOth.cc	test -> printBoard() & init()
+V1.1.1:Valid Move	Check if a move is valid
+	     		APP Othello.*	bool validMove(int,int,char) 
+V1.1.2:Put a chess	Put a chess for AI or HM
+	     		APP Othello.*   putChessAI() 
+			    		putChessHM() 
+V1.1.3:Update af. put   Update the board after a valid put
+	      	  	APP Othello.*   updateAfterPut() 
+V1.1.4:Debug valid	Need to consider the diagonal cases
+	     		MOD Othello.*	validMove()
+			    		updateAfterMove()
+V1.1.5:Occupied cells   Return all the avaliable moves
+		 	APP Othello.*   struct cord(x,y)
+			    		vector<cord> occupied
+					void printOccupied()
+V1.1.6:Explore valid	Explore the avaliable moves on current
+	       		APP Othello.*	vector<cord> avaliable
+			    		bool explore(char)
+					void printAvaliable
+V1.1.7:HMvsHM game	Provide a basic HMvsHM game
+	      		ADD HMvsHM.cc	
+			MOD Othello.*	bool explore(char)
+V1.1.8:Debug update	Debug and release the HMvsHM game
+	     		MOD Othello.*   void updateAfterPut()
+V1.1.9:Game result	Provide the function to evaluate the game result
+	    		APP Othello.*
+V1.2.0:Refactor	I	Seperate Othello & Cord classes
+			ADD Cord.*
+			MOD Othello.*
+V1.2.1:Refactor II	Seperate Othello & HM player
+			ADD HM.*
+			MOD Othello.* 
+			MOD HMvsHM.*
