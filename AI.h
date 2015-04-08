@@ -47,6 +47,7 @@ class AI {
    *  minValue(othello,a,b,curr,limit)
    */
   Cord alphaBetaSearch(int&, int);
+  Cord idAlphaBetaSearch();
   int maxValue(AI,int&,int,int,int);
   int minValue(AI,int,int&,int,int);
 

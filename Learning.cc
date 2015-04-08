@@ -2,7 +2,7 @@
  * @file   AIvsAI.cc
  * @Author Bacpfsec Rick
  * @date   20150408
- * @brief  Sample Game between 2 AI
+ * @brief  Test program for AI Class
  *
  */
 #include <vector>
@@ -11,6 +11,7 @@
 #include <stdio.h>
 #include "Othello.h"
 #include "AI.h"
+#include "HM.h"
 using namespace std;
 
 Othello ot;

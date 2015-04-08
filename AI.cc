@@ -148,10 +148,24 @@ int AI::minValue(AI ai,int a,int& b,int curr, int limit) {
 }
 
 void AI::putChess() {
-  int currV = 0;
-  Cord move = alphaBetaSearch(currV,9);
+  Cord move = idAlphaBetaSearch();
   cout<<"AI "<<xo<<" puts "<<xo<<" at ("<<move.x<<","<<move.y<<")!"<<endl;
   ot.board[move.x][move.y] = xo;
   ot.updateAfterPut(move.x,move.y,xo);
   ot.occupied.push_back(move);
+}
+
+
+Cord AI::idAlphaBetaSearch() {
+  int best = -999999, trial = 0;
+  Cord action;
+  for (int i=1; i<10; i++) {
+    nextAction = 0; // init
+    Cord temp = alphaBetaSearch(trial, i);
+    if (trial>best) {
+      best = trial;
+      action = temp;
+    }
+  }
+  return action;
 }
