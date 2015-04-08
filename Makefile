@@ -1,15 +1,17 @@
 CFLAGS = -I -c -Wall
 LIBDIR =
 LNFLAGS =
-#OBJECTS1 = Cord.o Othello.o HM.o HMvsHM.o
-OBJECTS1 = Cord.o Othello.o HM.o AI.o TestAI.o
+OBJECTS1 = Cord.o Othello.o HM.o HMvsHM.o
+OBJECTS2 = Cord.o Othello.o HM.o AI.o TestAI.o
 
-#all:   HMvsHM
-all: 	AItest
+all:   HMvsHM TestAI
 
-#HMvsHM: $(OBJECTS1)
-AItest: $(OBJECTS1)
+HMvsHM: $(OBJECTS1)
 	g++ -std=c++0x -o $@ $^
+
+TestAI: $(OBJECTS2)
+	g++ -std=c++0x -o $@ $^
+
 	rm -rf *o *~
 
 #	g++ -std=c++0x -L $(LIBDIR) -o $@ $^ $(LNFLAGS)  
@@ -20,3 +22,4 @@ AItest: $(OBJECTS1)
 clean:
 	rm -rf *o *~
 	rm HMvsHM
+	rm TestAI

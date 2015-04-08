@@ -41,3 +41,8 @@ V1.2.1:Refactor II	Seperate Othello & HM player
 			ADD HM.*
 			MOD Othello.* 
 			MOD HMvsHM.*
+V1.2.2:AI set up	Set up the AI with evaluation function
+			ADD AI.*
+			    TestAI.cc
+V1.2.3:Improve eval.    Consider the end of game cases in the evaluation
+	       		MOD AI.*

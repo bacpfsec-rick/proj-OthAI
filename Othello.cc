@@ -193,6 +193,8 @@ void Othello::gameResult() {
 	count++;
       }
     }
+    cout<<"# of X disks : "<<count<<endl;
+    cout<<"# of O disks : "<<(occupied.size()-count)<<endl;
     if (count>(occupied.size()-count)) {
       cout<<"Player X wins!"<<endl;
     } else if (count<(occupied.size()-count)) {

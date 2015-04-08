@@ -47,6 +47,7 @@ bool AI::explore(char c) {
 int AI::evaluate(char c) {
   explore(c);
   int nol = avaliable.size(), nod = 0, now = 0;
+  int result = 0;
   for (unsigned int i=0; i<ot.occupied.size(); i++) {
     int x = ot.occupied[i].x, y = ot.occupied[i].y;
     if (ot.board[x][y]==c) {
@@ -60,7 +61,17 @@ int AI::evaluate(char c) {
       }
     }
   }
-  int result = nod*wod + nol*wod + now*wow;
+  // Basic result
+  result  = nod*wod + nol*wod + now*wow;
+  // Consider nol==0 as end of game
+  if (nol==0) {
+    unsigned int r = (unsigned)nod;
+    if (r>ot.occupied.size()) { // win
+      result += 9999;
+    } else { // lose or tie
+      result -= 9999;
+    }
+  }
   // Print the current status
   cout<<"Current # of disk: "<<nod<<endl;
   cout<<"Current # of legal moves: "<<nol<<endl;

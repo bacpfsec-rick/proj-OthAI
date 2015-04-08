@@ -19,11 +19,14 @@ AI ai(ot);
 HM hm(ot);
 
 int main() {
-  ot.printBoard();
-  ai.evaluate('X');
-
-  hm.putChess(-1,-1,'X');
-  ai.evaluate('O');
-
+  /* Test the evaluate */
+  while (true) {
+    ot.printBoard();
+    ai.evaluate('X');
+    hm.putChess(-1,-1,'X');    
+    ot.printBoard();
+    ai.evaluate('O');
+    hm.putChess(-1,-1,'O');
+  }
   return 0;
 }
