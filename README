@@ -46,3 +46,5 @@ V1.2.2:AI set up	Set up the AI with evaluation function
 			    TestAI.cc
 V1.2.3:Improve eval.    Consider the end of game cases in the evaluation
 	       		MOD AI.*
+V1.2.4:Basic A-B	Build the basic alpha-beta pruning
+	     		APP AI.*

@@ -15,18 +15,20 @@
 using namespace std;
 
 Othello ot;
-AI ai(ot);
+AI aix(ot,'X');
+AI aio(ot,'O');
 HM hm(ot);
 
 int main() {
   /* Test the evaluate */
   while (true) {
     ot.printBoard();
-    ai.evaluate('X');
+    aix.evaluate();
     hm.putChess(-1,-1,'X');    
     ot.printBoard();
-    ai.evaluate('O');
-    hm.putChess(-1,-1,'O');
+    aio.evaluate();
+    aio.putChess();
+    //    hm.putChess(-1,-1,'O');
   }
   return 0;
 }
