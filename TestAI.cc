@@ -15,20 +15,37 @@
 using namespace std;
 
 Othello ot;
-AI aix(ot,'X');
-AI aio(ot,'O');
-HM hm(ot);
+HM hmX(ot);
+AI aiO(ot,'O',1,2,3);
+
+void HMPlay(Othello& ot);
+void AIPlay(Othello& ot);
+
+void HMPlay(Othello& ot) {
+  ot.printBoard();
+  ot.printOccupied();
+  if (hmX.explore('X')) {
+    cout<<"Player X decides to put chess at:";
+    hmX.putChess(-1,-1,'X');
+    AIPlay(ot);
+  } else {
+    ot.gameResult();
+  }
+}
+
+void AIPlay(Othello& ot) {
+  ot.printBoard();
+  ot.printOccupied();
+  if (aiO.explore()) {
+    aiO.putChess();
+    HMPlay(ot);
+  } else {
+    ot.gameResult();
+  }
+}
 
 int main() {
-  /* Test the evaluate */
-  while (true) {
-    ot.printBoard();
-    aix.evaluate();
-    hm.putChess(-1,-1,'X');    
-    ot.printBoard();
-    aio.evaluate();
-    aio.putChess();
-    //    hm.putChess(-1,-1,'O');
-  }
+  HMPlay(ot);
+
   return 0;
 }

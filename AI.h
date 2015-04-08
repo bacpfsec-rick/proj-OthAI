@@ -47,8 +47,8 @@ class AI {
    *  minValue(othello,a,b,curr,limit)
    */
   Cord alphaBetaSearch(int&, int);
-  int maxValue(AI,int,int,int,int);
-  int minValue(AI,int,int,int,int);
+  int maxValue(AI,int&,int,int,int);
+  int minValue(AI,int,int&,int,int);
 
   /* Put a chess
    *
@@ -63,6 +63,9 @@ class AI {
 
   /** Date record of numbers & weight combination */
   int wod, wol, wow;
+
+  /** Record index of next action in maxValue */
+  int nextAction;
 };
 
 #endif

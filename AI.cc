@@ -9,8 +9,8 @@
 #include "AI.h"
 
 AI::AI(Othello& o, char c, int d, int l, int w) :
-  ot(o), xo(c), wod(d), wol(l), wow(w) {
-
+  ot(o), xo(c), wod(d), wol(l), wow(w), nextAction(0) {
+  avaliable.clear();
 }
 
 void AI::printAvaliable() {
@@ -39,7 +39,7 @@ bool AI::explore() {
   if (avaliable.size()==0) {
     return false;
   } else {
-    printAvaliable();
+    //    printAvaliable();
     return true;
   }
 }
@@ -73,21 +73,24 @@ int AI::evaluate() {
     }
   }
   // Print the current status
+  /*
   cout<<"Current # of disk: "<<nod<<endl;
   cout<<"Current # of legal moves: "<<nol<<endl;
   cout<<"Current disk weights: "<<now<<endl;
   cout<<"Current evaluation: "<<result<<endl;
+  */
   return result;
 }
 
 Cord AI::alphaBetaSearch(int& v, int limit) {
   Othello state = ot;
   AI ai(state);
-  v = maxValue(ai,-999999,999999,1,limit);
-  return Cord();
+  int ninf = -999999, pinf = 999999;
+  v = maxValue(ai,ninf,pinf,1,limit);
+  return avaliable[nextAction];
 }
 
-int AI::maxValue(AI ai,int a,int b,int curr, int limit) {
+int AI::maxValue(AI ai,int& a,int b,int curr, int limit) {
   // terminal case: end of game or leaf as limit reached
   if (ai.explore()==false || curr==limit) {
     return ai.evaluate();
@@ -95,12 +98,22 @@ int AI::maxValue(AI ai,int a,int b,int curr, int limit) {
   int v = -999999;
   for (unsigned int i=0; i<ai.avaliable.size(); i++) {
     // create next board state & AI
-    Othello nextState = ai.ot; 
-    nextState.board[ai.avaliable[i].x][ai.avaliable[i].y] =
-      ((ai.xo=='C') ? 'C' : 'X');
-    AI nextAI(nextState,((ai.xo=='C') ? 'X' : 'C'),wod,wol,wow);
+    Othello nextState = ai.ot;
+    int x = ai.avaliable[i].x, y = ai.avaliable[i].y; 
+    nextState.board[x][y] = ai.xo;
+    nextState.updateAfterPut(x,y,ai.xo);
+    AI nextAI(nextState,ai.xo,wod,wol,wow);
+    ///
     // a-b progress
-    v = max(v,minValue(nextAI,a,b,curr+1,limit));
+    if (curr==1) { //decide for next action
+      int mv = minValue(nextAI,a,b,curr+1,limit);
+      if (mv>v) {
+	v = mv;
+	nextAction = i; // record the index to max V
+      }
+    } else {
+      v = max(v,minValue(nextAI,a,b,curr+1,limit));
+    }
     if (v>=b) {
       return v;
     }
@@ -109,24 +122,27 @@ int AI::maxValue(AI ai,int a,int b,int curr, int limit) {
   return v; 
 }
 
-int AI::minValue(AI ai,int a,int b,int curr, int limit) {
+int AI::minValue(AI ai,int a,int& b,int curr, int limit) {
   // terminal case: end of game or leaf as limit reached
   if (ai.explore()==false || curr==limit) {
-    return ai.evaluate();
+    int utility = ai.evaluate();
+    return utility;
   }
   int v = +999999;
   for (unsigned int i=0; i<ai.avaliable.size(); i++) {
     // create next board state & AI
-    Othello nextState = ai.ot; 
-    nextState.board[ai.avaliable[i].x][ai.avaliable[i].y] =
-      ((ai.xo=='C') ? 'C' : 'X');
-    AI nextAI(nextState,((ai.xo=='C') ? 'X' : 'C'),wod,wol,wow);
+    Othello nextState = ai.ot;
+    int x = ai.avaliable[i].x, y = ai.avaliable[i].y; 
+    nextState.board[x][y] = ((ai.xo=='X') ? 'O' : 'X');
+    nextState.updateAfterPut(x,y,((ai.xo=='X') ? 'O' : 'X'));
+    AI nextAI(nextState,ai.xo,wod,wol,wow);
+    ///
     // a-b progress
-    v = max(v,maxValue(nextAI,a,b,curr+1,limit));
+    v = min(v,maxValue(nextAI,a,b,curr+1,limit));
     if (v<=a) {
       return v;
     }
-    b = max(b,v);
+    b = min(b,v);
   }
   return v; 
 }
@@ -134,6 +150,7 @@ int AI::minValue(AI ai,int a,int b,int curr, int limit) {
 void AI::putChess() {
   int currV = 0;
   Cord move = alphaBetaSearch(currV,5);
+  cout<<"AI "<<xo<<" puts "<<xo<<"at ("<<move.x<<","<<move.y<<")!"<<endl;
   ot.board[move.x][move.y] = xo;
   ot.updateAfterPut(move.x,move.y,xo);
   ot.occupied.push_back(move);
