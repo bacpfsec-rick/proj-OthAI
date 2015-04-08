@@ -186,7 +186,7 @@ void Othello::printOccupied() {
   }
 }
 
-void Othello::gameResult() {
+bool Othello::gameResult() {
     unsigned int count = 0;
     for(unsigned int i=0; i<occupied.size(); i++) {
       if (board[occupied[i].x][occupied[i].y]=='X') {
@@ -196,10 +196,13 @@ void Othello::gameResult() {
     cout<<"# of X disks : "<<count<<endl;
     cout<<"# of O disks : "<<(occupied.size()-count)<<endl;
     if (count>(occupied.size()-count)) {
-      cout<<"Player X wins!"<<endl;
+      cout<<"****** X wins ******!"<<endl;
+      return true;
     } else if (count<(occupied.size()-count)) {
-      cout<<"Player O wins!"<<endl;
+      cout<<"****** O wins ******!"<<endl;
+      return false;
     } else {
       cout<<"TIE GAME!"<<endl;
+      return false;
     }
 }

@@ -48,3 +48,9 @@ V1.2.3:Improve eval.    Consider the end of game cases in the evaluation
 	       		MOD AI.*
 V1.2.4:Basic A-B	Build the basic alpha-beta pruning
 	     		APP AI.*
+V1.3.0:HMvsAI KO	The HM vs AI game is now working!
+	      		REN TestAI.cc->HMvsAI.cc
+			MOD AI.* 
+V1.3.1:Apply learning   Use AI vs AI strategy to force learning
+	     		MOD Othello.*
+	     		ADD AIvsAI.cc

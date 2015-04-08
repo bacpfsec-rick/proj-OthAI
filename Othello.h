@@ -62,8 +62,10 @@ class Othello {
 
   /* Check and print the game result
    *
+   * Return true if X wins
+   * Return false if O wins or tie game
    */
-  void gameResult();
+  bool gameResult();
 };
 
 #endif
