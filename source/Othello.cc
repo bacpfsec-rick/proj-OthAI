@@ -43,7 +43,7 @@ void Othello::init() {
 }
 
 bool Othello::validMove(int x,int y,char c) {
-  if (board[x][y]!=' ') { // occupied
+  if (board[x][y]=='X' || board[x][y]=='C') { // occupied
     return false;
   }
   if (x>0) {  // check left
@@ -102,7 +102,7 @@ bool Othello::validMove(int x,int y,char c) {
     }
   }
   if (x>0 && y<7) {  // check up-right
-    if(board[x-1][y+1]!=' ' && board[x-1][y+1]!=c) {
+   if(board[x-1][y+1]!=' ' && board[x-1][y+1]!=c) {
       for (int j=2; ((x-j)>=0 && (y+j)<=7); j++) {
 	if(board[x-j][y+j]==c) {
 	  return true;
@@ -112,7 +112,7 @@ bool Othello::validMove(int x,int y,char c) {
       }
     }
   }
-  if (x<0 && y>0) {  // check down-left
+  if (x>0 && y>0) {  // check down-left
     if(board[x+1][y-1]!=' ' && board[x+1][y-1]!=c) {
       for (int j=2; ((x+j)<=7 && (y-j)>=0); j++) {
 	if(board[x+j][y-j]==c) {
