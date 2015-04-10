@@ -7,6 +7,7 @@
  */
 #include "Othello.h"
 #include "AI.h"
+#include <time.h>
 
 AI::AI(Othello& o, char c, int d, int l, int w) :
   ot(o), xo(c), wod(d), wol(l), wow(w), nextAction(0) {
@@ -159,8 +160,14 @@ void AI::putChess() {
 Cord AI::idAlphaBetaSearch() {
   int best = -999999, trial = 0;
   Cord action;
-  for (int i=1; i<10; i++) {
+  time_t start, now;
+  time(&start);
+  for (int i=1; ; i++) {
     nextAction = 0; // init
+    time(&now);
+    if (difftime(now,start)>1) {
+      break;
+    }
     Cord temp = alphaBetaSearch(trial, i);
     if (trial>best) {
       best = trial;

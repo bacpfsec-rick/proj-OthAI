@@ -62,8 +62,8 @@ int main() {
   ofstream ofs;
   ofs.open("RecordOfLearning");
   ofs<<"The initial weight : "<<wodX<<"\t"<<wolX<<"\t"<<wowX<<endl;
-  // Compete and learn against another AI for 5000 times
-  while (count!=5000) {
+  // Compete and learn against another AI for 100 times
+  while (count!=100) {
     Othello ot;
     AI aiX(ot,'X',wodX,wolX,wowX);
     AI aiO(ot,'O',wodO,wolO,wowO);
@@ -79,13 +79,13 @@ int main() {
     int i = rand()%3;
     switch (i) {
     case 0:
-      wodO += rand()%10;
+      wodO += (wodO+wolO+wowO)/10;
       break;
     case 1:
-      wolO += rand()%10;
+      wolO += (wodO+wolO+wowO)/10;
       break;
     case 2:
-      wowO += rand()%10;
+      wowO += (wodO+wolO+wowO)/10;
       break;
     default:
       break;
