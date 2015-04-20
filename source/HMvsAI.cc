@@ -16,7 +16,7 @@ using namespace std;
 
 Othello ot;
 HM hmX(ot);
-AI aiO(ot,'O',1,2,3);
+AI aiO(ot,'O',506,505,190);
 
 void HMPlay(Othello& ot);
 void AIPlay(Othello& ot);

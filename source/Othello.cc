@@ -43,7 +43,8 @@ void Othello::init() {
 }
 
 bool Othello::validMove(int x,int y,char c) {
-  if (board[x][y]=='X' || board[x][y]=='O') { // occupied
+  if (board[x][y]=='X' || board[x][y]=='O'
+      || x<0 || x>7 || y<0 || y>7 ) { // occupied
     return false;
   }
   if (x>0) {  // check left
